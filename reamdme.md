@@ -2,7 +2,7 @@
 
 npm create vite@latest
 
-  cd music_frontend
+  cd
   npm install
   npm run dev
 
@@ -111,5 +111,4 @@ http://localhost:5555/books
   "year": 1951,
   "description": "A story about the adolescent life of Holden Caulfield, his confusion, and his alienation from society."
 }
-
 

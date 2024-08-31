@@ -1,8 +1,8 @@
 // HomePage.jsx
 
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 
-import { BACKEND_URL } from '../../config';
+//import { BACKEND_URL } from '../../config';
 import BookCard from '../components/BookCard';
 
 // Import the new BookCard component

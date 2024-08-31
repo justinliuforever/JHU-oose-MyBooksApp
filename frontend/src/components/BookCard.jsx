@@ -27,6 +27,23 @@ const BookCard = () => {
     fetchBooks();
   }, []);
 
+  const handleDelete = async (bookId) => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/${bookId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete the book');
+      }
+
+      setBooks(books.filter((book) => book._id !== bookId));
+    } catch (err) {
+      setError(err.message);
+      console.error("Failed to delete book:", err);
+    }
+  };
+
   if (error) return <p className="text-red-500">Error: {error}</p>;
   if (books.length === 0) return <p>Loading...</p>;
 
@@ -60,6 +77,13 @@ const BookCard = () => {
               </p>
             </div>
           </div>
+          {/* Delete Button */}
+          <button
+            onClick={() => handleDelete(book._id)}
+            className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
         </article>
       ))}
     </div>

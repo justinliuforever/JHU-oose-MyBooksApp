@@ -60,7 +60,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Route for deleting a book by ID
+// Backend route for deleting a book by ID
 router.delete('/:id', async (req, res) => {
   try {
     const deletedBook = await Book.findByIdAndDelete(req.params.id);
@@ -70,8 +70,9 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json({ msg: 'Book deleted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ msg: error.message });
+    res.status(500).send({ msg: 'Internal Server Error' });
   }
 });
+
 
 export default router;

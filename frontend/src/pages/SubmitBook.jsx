@@ -1,6 +1,7 @@
 // SubmitBook.jsx
 
 import { BACKEND_URL } from '../../config';
+import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -52,8 +53,8 @@ const SubmitBook = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-8">
-      <h2 className="text-2xl font-bold mb-6">Submit a New Book</h2>
+    <div className="max-w-4xl mx-auto p-8">
+      <NavBar title="Submit New Book"/>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

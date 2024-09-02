@@ -36,4 +36,24 @@ router.get('/users', async (req, res) => {
   }
 });
 
+// New route to get all books liked by a specific user
+router.post('/liked-books', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).send({ msg: 'Email is required' });
+  }
+
+  try {
+    const user = await User.findOne({ email }).populate('likedBooks');
+    if (!user) {
+      return res.status(404).send({ msg: 'User not found' });
+    }
+
+    res.status(200).json(user.likedBooks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ msg: 'Internal Server Error' });
+  }
+});
+
 export default router;

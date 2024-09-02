@@ -44,9 +44,8 @@ const SubmitBook = () => {
       if (!response.ok) {
         throw new Error('Failed to submit book');
       }
-
+      alert('Book submitted successfully');
       navigate('/');
-
     } catch (err) {
       setError(err.message);
     }

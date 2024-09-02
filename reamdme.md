@@ -26,16 +26,6 @@ npm run dev
 
 
 
-## 修改
-
-1.增加在detail page可以现场修改
-
-2.在detail page delete的时候, 目前只delete MongoDB, 之后增加Delete FireBase的API (目前image和audio没有被一起delete) √, 通过后端改好了
-
-3.增加web 网页登录系统, 只能授权的email才能登录
-
-
-
 
 
 ### GIT

@@ -1,4 +1,5 @@
 import { Book } from '../models/booksLibraryModel.js';
+import { User } from '../models/userModel.js'; // Add this line
 import express from 'express';
 
 const router = express.Router();
@@ -74,5 +75,32 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Route for liking a book
+router.post('/:id/like', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).send({ msg: 'Email is required' });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send({ msg: 'User not found' });
+    }
+
+    const book = await Book.findById(req.params.id);
+    if (!book) {
+      return res.status(404).send({ msg: 'Book not found' });
+    }
+
+    user.likedBooks.push(book._id);
+    await user.save();
+
+    res.status(200).send({ msg: 'Book liked successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ msg: 'Internal Server Error' });
+  }
+});
 
 export default router;

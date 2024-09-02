@@ -2,17 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
-import { BACKEND_URL } from '../../config'; // Ensure BACKEND_URL is correctly imported
+import { BOOKS_URL } from '../../config';
 
-const BookCard = () => {
+const BookCard = ({ userEmail }) => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch all books data from the backend
     const fetchBooks = async () => {
       try {
-        const response = await fetch(BACKEND_URL);
+        const response = await fetch(BOOKS_URL);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -29,7 +28,7 @@ const BookCard = () => {
 
   const handleDelete = async (bookId) => {
     try {
-      const response = await fetch(`${BACKEND_URL}/${bookId}`, {
+      const response = await fetch(`${BOOKS_URL}/${bookId}`, {
         method: 'DELETE',
       });
 
@@ -41,6 +40,27 @@ const BookCard = () => {
     } catch (err) {
       setError(err.message);
       console.error("Failed to delete book:", err);
+    }
+  };
+
+  const handleLike = async (bookId) => {
+    try {
+      const response = await fetch(`${BOOKS_URL}/${bookId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: userEmail }), // Use the logged-in user's email
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to like the book');
+      }
+
+      alert('Book liked successfully');
+    } catch (err) {
+      setError(err.message);
+      console.error("Failed to like book:", err);
     }
   };
 
@@ -77,7 +97,12 @@ const BookCard = () => {
               </p>
             </div>
           </div>
-          {/* Delete Button */}
+          <button
+            onClick={() => handleLike(book._id)}
+            className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Like
+          </button>
           <button
             onClick={() => handleDelete(book._id)}
             className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
@@ -91,3 +116,4 @@ const BookCard = () => {
 };
 
 export default BookCard;
+

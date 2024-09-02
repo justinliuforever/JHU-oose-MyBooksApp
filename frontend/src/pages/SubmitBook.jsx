@@ -1,6 +1,6 @@
 // SubmitBook.jsx
 
-import { BACKEND_URL } from '../../config';
+import { BOOKS_URL } from '../../config';
 import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -33,7 +33,7 @@ const SubmitBook = () => {
     };
 
     try {
-      const response = await fetch(BACKEND_URL, {
+      const response = await fetch(BOOKS_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

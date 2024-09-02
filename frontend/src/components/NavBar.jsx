@@ -10,7 +10,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function NavBar({ title }) { // Receive title as a prop
+export default function NavBar({ title, userEmail }) { // Receive userEmail as a prop
   const location = useLocation(); // Hook to get the current path
 
   return (
@@ -52,13 +52,9 @@ export default function NavBar({ title }) { // Receive title as a prop
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <Menu.Button className="flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      <span className="text-gray-700">{userEmail}</span>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -127,11 +123,9 @@ export default function NavBar({ title }) { // Receive title as a prop
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
+                  <span className="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 text-gray-700">
+                    {userEmail}
+                  </span>
                 </div>
               </div>
               <div className="mt-3 space-y-1">

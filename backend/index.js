@@ -1,5 +1,6 @@
 import { PORT, mongoDBURL } from './config.js';
 
+import authRoutes from './routes/authRoutes.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -22,6 +23,9 @@ app.get('/', (req, res) => {
 
 // Use the musicRoutes for handling requests at the '/music' route
 app.use('/books', musicRoutes);
+
+// Add this line to use auth routes
+app.use('/auth', authRoutes);
 
 // Connect to MongoDB and start the server
 mongoose

@@ -30,6 +30,25 @@ const LikedBooks = ({ userEmail }) => {
     fetchLikedBooks();
   }, [userEmail]);
 
+  const handleDelete = async (bookId) => {
+    try {
+      const response = await fetch(`${AUTH_URL}/delete-liked-book`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: userEmail, bookId }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete the book');
+      }
+      setLikedBooks(likedBooks.filter((book) => book._id !== bookId));
+    } catch (err) {
+      setError(err.message);
+      console.error("Failed to delete book:", err);
+    }
+  };
+
   if (error) return <p className="text-red-500">Error: {error}</p>;
   if (likedBooks.length === 0) return <p>No liked books found.</p>;
 
@@ -63,6 +82,12 @@ const LikedBooks = ({ userEmail }) => {
               </p>
             </div>
           </div>
+          <button
+            onClick={() => handleDelete(book._id)}
+            className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
         </article>
       ))}
     </div>

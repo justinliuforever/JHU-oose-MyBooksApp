@@ -22,6 +22,7 @@ const LoginPage = ({ setUserEmail }) => {
       }
 
       setUserEmail(email);
+      localStorage.setItem('userEmail', email); // Store email in localStorage
       navigate('/');
     } catch (err) {
       setError(err.message);

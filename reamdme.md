@@ -1,3 +1,21 @@
+# Introduction
+
+
+
+# Web feature
+
+Login system: 用户需要输入邮箱登陆网站, 邮箱会被储存到后段, 用于分别记录不同用户喜欢的书
+
+Home Page: 有展示Database中所有的图书和用户喜欢的图书. 有Like 和 Delete功能按钮, 并且在右上方点击右键后可以Sign Out当前账户
+
+Submit Page: 可以输入图书信息后保存到数据库. 
+
+
+
+
+
+
+
 ### React
 
 npm create vite@latest
@@ -17,31 +35,6 @@ npm install @headlessui/react
 https://tailwindcss.com/docs/guides/vite
 
 Follow above link to install Tailwind CSS
-
-### Run
-
-npm run dev
-
-这里upload, 先把image 和 audio stream发给firebase, 然后拿到return的URL后再储存在form中, 最后再向MongoDB提交. 
-
-
-
-
-
-### GIT
-
-// push to remote
-git push -u origin main
-
-git pull origin main
-
-//witch to the feature branch 
-
-git checkout feature-branch 
-
-//Merge changes from main into feature-branch 
-
-
 
 ### Backend
 

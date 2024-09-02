@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { BOOKS_URL } from '../../config';
+import { BOOKS_URL } from '../../config'; // Ensure BACKEND_URL is correctly imported
 
 const BookCard = ({ userEmail }) => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Fetch all books data from the backend
     const fetchBooks = async () => {
       try {
         const response = await fetch(BOOKS_URL);
@@ -50,7 +51,7 @@ const BookCard = ({ userEmail }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: userEmail }), // Use the logged-in user's email
+        body: JSON.stringify({ email: userEmail }),
       });
 
       if (!response.ok) {
@@ -97,12 +98,14 @@ const BookCard = ({ userEmail }) => {
               </p>
             </div>
           </div>
+          {/* Like Button */}
           <button
             onClick={() => handleLike(book._id)}
             className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
           >
             Like
           </button>
+          {/* Delete Button */}
           <button
             onClick={() => handleDelete(book._id)}
             className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"

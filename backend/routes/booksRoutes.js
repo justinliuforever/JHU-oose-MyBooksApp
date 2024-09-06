@@ -4,24 +4,37 @@ import express from 'express';
 
 const router = express.Router();
 
+// Route for fetching suggestions
+router.get('/suggestions', async (req, res) => {
+  try {
+    const books = await Book.find({}, 'title author');
+    const suggestions = books.map(book => ({ title: book.title, author: book.author }));
+    res.status(200).json(suggestions);
+  } catch (error) {
+    console.error('Error fetching suggestions:', error);
+    res.status(500).send({ msg: 'Internal Server Error' });
+  }
+});
+
+// Route for searching books
 router.get('/search', async (req, res) => {
   const { title, author } = req.query;
 
   const filter = {};
   if (title) {
-    filter.title = { $regex: title, $options: 'i' };
+    filter.title = { $regex: title, $options: 'i' }; // Case-insensitive regex search
   }
   if (author) {
-    filter.author = { $regex: author, $options: 'i' };
+    filter.author = { $regex: author, $options: 'i' }; // Case-insensitive regex search
   }
 
-  console.log('Search filter:', filter); 
+  console.log('Search filter:', filter); // Add this line for debugging
 
   try {
     const books = await Book.find(filter);
     res.status(200).json(books);
   } catch (error) {
-    console.error('Error fetching books:', error);
+    console.error('Error fetching books:', error); // Add this line for debugging
     res.status(500).send({ msg: 'Internal Server Error' });
   }
 });
@@ -124,5 +137,6 @@ router.post('/:id/like', async (req, res) => {
     res.status(500).send({ msg: 'Internal Server Error' });
   }
 });
+
 
 export default router;

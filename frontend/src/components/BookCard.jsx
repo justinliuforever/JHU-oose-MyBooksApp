@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { BOOKS_URL } from '../../config';
 
-const BookCard = ({ userEmail }) => {
-  const [books, setBooks] = useState([]);
+const BookCard = ({ userEmail, books, setBooks }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch all books data from the backend
+    // Fetch all books data from the backend if books prop is empty
     const fetchBooks = async () => {
       try {
         const response = await fetch(BOOKS_URL);
@@ -24,8 +23,10 @@ const BookCard = ({ userEmail }) => {
       }
     };
 
-    fetchBooks();
-  }, []);
+    if (books.length === 0) {
+      fetchBooks();
+    }
+  }, [books, setBooks]);
 
   const handleDelete = async (bookId) => {
     try {

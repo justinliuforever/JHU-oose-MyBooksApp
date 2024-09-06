@@ -4,6 +4,28 @@ import express from 'express';
 
 const router = express.Router();
 
+router.get('/search', async (req, res) => {
+  const { title, author } = req.query;
+
+  const filter = {};
+  if (title) {
+    filter.title = { $regex: title, $options: 'i' };
+  }
+  if (author) {
+    filter.author = { $regex: author, $options: 'i' };
+  }
+
+  console.log('Search filter:', filter); 
+
+  try {
+    const books = await Book.find(filter);
+    res.status(200).json(books);
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    res.status(500).send({ msg: 'Internal Server Error' });
+  }
+});
+
 // Route for creating a new book
 router.post('/', async (req, res) => {
   console.log(req.body);

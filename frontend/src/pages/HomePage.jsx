@@ -1,16 +1,14 @@
 // HomePage.jsx
 
-//import { useEffect, useState } from 'react';
-
-//import { BACKEND_URL } from '../../config';
 import BookCard from '../components/BookCard';
 import LikedBooks from '../components/LikedBooks';
-import NavBar from '../components/NavBar'
-
-// Import the new BookCard component
-
+import NavBar from '../components/NavBar';
+import SearchBar from '../components/SearchBar';
+import { useState } from 'react';
 
 const HomePage = ({ userEmail }) => {
+  const [books, setBooks] = useState([]);
+
   return (
     <div className="relative min-h-screen">
       <div className="absolute top-0 -z-10 h-full w-full bg-white">
@@ -18,8 +16,9 @@ const HomePage = ({ userEmail }) => {
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <NavBar title="Home" userEmail={userEmail} />
+        <SearchBar setBooks={setBooks} />
         <article className="mt-6"> 
-          <BookCard userEmail={userEmail} />
+          <BookCard userEmail={userEmail} books={books} setBooks={setBooks} />
         </article>
         <article className="mt-6">
           <LikedBooks userEmail={userEmail} />

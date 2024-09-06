@@ -4,11 +4,39 @@
 
 MyBooksApp is a web application that allows users to manage their personal book library. Users can log in, search for books, like or delete books, view their liked books, and submit new books to the library.
 
-#### Web URL :
+#### Web URL : https://jhu-oose-mybooksapp.onrender.com
 
 #### Backend Remote URL: https://jhu-oose-mybooksapp-backend.onrender.com
 
 
+
+### Web Test Flow
+
+1. **Login**
+   - Open the web application at https://jhu-oose-mybooksapp.onrender.com
+   - You will be redirected to the login page.
+   - Enter your email and click the "Login" button.
+   - If the email is not registered, it will be registered automatically.
+   - You will be redirected to the Home Page.
+2. **Home Page**
+   - The Home Page displays all the books available in the database.
+   - You can see the books you have liked in the "User Liked Books" section.
+   - You can like or delete books from the library.
+3. **Search Function**
+   - Use the search bar to search for books by title or author.
+   - When you click on the search bar, a dropdown will display available titles or authors from the backend.
+   - Enter a search term and click the "Search" button to filter the books.
+4. **Submit New Book**
+   - Navigate to the Submit Page by clicking the "Submit" link in the navigation bar.
+   - Enter the book information (title, author, ISBN, year, description) and click the "Submit" button.
+   - The new book will be added to the database and displayed on the Home Page.
+5. **Like and Delete Books**
+   - On the Home Page, you can like a book by clicking the "Like" button.
+   - You can delete a book by clicking the "Delete" button.
+   - Liked books will appear in the "User Liked Books" section.
+6. **Sign Out**
+   - Click the sign-out button in the top right corner to sign out of your account.
+   - You will be redirected to the login page.
 
 
 
